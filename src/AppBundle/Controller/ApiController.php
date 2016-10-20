@@ -71,6 +71,10 @@ class ApiController extends FOSRestController
 
     }
 
+    /**
+     * Sends email and saves status
+     * @param Email $email
+     */
     private function sendEmail( Email $email )
     {
 

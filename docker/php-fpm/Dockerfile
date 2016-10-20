@@ -6,8 +6,7 @@ RUN composer --version
 
 RUN docker-php-ext-install pdo pdo_mysql
 
-RUN useradd -ms /bin/bash sarathdr
- 
-USER sarathdr
- 
+# Hack for symfony cache folder, need a better solution
+USER 1000
+
 WORKDIR /app

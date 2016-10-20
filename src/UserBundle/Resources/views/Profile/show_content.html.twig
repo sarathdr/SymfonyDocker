@@ -4,4 +4,30 @@
     <p>Api Key: <input type="text" style="width: 300px;" value="{{ user.apiKey }}"></p>
     <p>{{ 'profile.show.username'|trans }}: {{ user.username }}</p>
     <p>{{ 'profile.show.email'|trans }}: {{ user.email }}</p>
+
+    <table>
+        <tr>
+            <th>Id</th>
+            <th>From</th>
+            <th>To</th>
+            <th>Subject</th>
+            <th>Message</th>
+        </tr>
+
+        {# table body #}
+        {% for email in pagination %}
+            <tr {% if loop.index is odd %}class="color"{% endif %}>
+                <td>{{ email.id }}</td>
+                <td>{{ email.fromEmail }}</td>
+                <td>{{ email.toEmail }}</td>
+                <td>{{ email.subject }}</td>
+                <td>{{ email.message }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+    {# display navigation #}
+    <div class="navigation">
+        {{ knp_pagination_render(pagination) }}
+    </div>
+
 </div>
