@@ -1,0 +1,14 @@
+# Learn more about services, parameters and containers at
+# http://symfony.com/doc/current/book/service_container.html
+parameters:
+#    parameter_name: value
+
+services:
+    api_key_user_provider:
+        class: AppBundle\Security\ApiKeyUserProvider
+        public: false
+        arguments: ['@fos_user.user_manager']
+
+    apikey_authenticator:
+        class:  AppBundle\Security\ApiKeyAuthenticator
+        public: false

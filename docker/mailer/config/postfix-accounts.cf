@@ -1,0 +1,6 @@
+docker run --rm \
+  -e MAIL_USER=user1@symfonyemailer.dev \
+  -e MAIL_PASS=password \
+  -ti tvial/docker-mailserver:latest \
+  /bin/sh -c 'echo "$MAIL_USER|$(doveadm pw -s SHA512-CRYPT -u $MAIL_USER -p $MAIL_PASS)"' >> 
+  ./docker/mailer/config/postfix-accounts.cf
