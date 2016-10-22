@@ -18,6 +18,8 @@ USER 1000
 
 WORKDIR /app
 
-COPY . ./
+ADD . ./
 RUN chmod -R 777 var/logs
 RUN chmod -R 777 var/cache
+RUN composer install --prefer-source --no-interaction --no-scripts --no-autoloader
+COPY . ./
