@@ -1,43 +1,50 @@
-nginx:
-  build: docker/nginx
-  ports:
-    - "8080:80"
-  links:
-    - php
-  volumes:
-    - ./:/app
+version: '2'
 
-php:
-  build: docker/php-fpm
-  links:
-    - mysql:mysqldb
-    - mailer:mailerhost
-  volumes:
-    - ./:/app
-  working_dir: /app
-
-mysql:
-    build: docker/mysql
+services:
+  nginx:
+    build: docker/nginx
     ports:
-        - 3306:3306
+      - "8080:80"
+    links:
+      - php
     volumes:
-        - "./.data/db:/var/lib/mysql"
-    environment:
-        MYSQL_ROOT_PASSWORD: password
-        MYSQL_DATABASE: emailer
-        MYSQL_USER: emailer
-        MYSQL_PASSWORD: password
+      - ./:/app
 
-mailer:
-  build: docker/mailer
-  container_name: mail
-  hostname: mail
-  domainname: symfonyemailer.dev
-  ports:
-      - "25:25"
-      - "143:143"
-      - "587:587"
-      - "993:993"
-  volumes:
-      - maildata:/var/mail
-      - ./docker/mailer/config/:/tmp/docker-mailserver/
+  php:
+    build: 
+      context: .
+      dockerfile: docker/php-fpm/Dockerfile
+    links:
+      - mysql:mysqldb
+      - mailer:mailerhost
+    volumes:
+      - ./:/app
+    working_dir: /app
+
+  mysql:
+      build: docker/mysql
+      ports:
+          - 3306:3306
+      volumes:
+          - "./.data/db:/var/lib/mysql"
+      environment:
+          MYSQL_ROOT_PASSWORD: password
+          MYSQL_DATABASE: emailer
+          MYSQL_USER: emailer
+          MYSQL_PASSWORD: password
+
+  mailer:
+    build: docker/mailer
+    container_name: mail
+    hostname: mail
+    domainname: symfonyemailer.dev
+    ports:
+        - "25:25"
+        - "143:143"
+        - "587:587"
+        - "993:993"
+    volumes:
+        - maildata:/var/mail
+        - ./docker/mailer/config/:/tmp/docker-mailserver/
+volumes:
+  maildata: {}

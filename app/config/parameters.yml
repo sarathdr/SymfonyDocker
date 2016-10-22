@@ -1,0 +1,12 @@
+# This file is auto-generated during the composer install
+parameters:
+    database_host: mysqldb
+    database_port: 3306
+    database_name: emailer
+    database_user: emailer
+    database_password: password
+    mailer_transport: smtp
+    mailer_host: mailerhost
+    mailer_user: user1@symfonyemailer.dev
+    mailer_password: password
+    secret: ec207b60debbbc855121f87fcb4f115c94348299
