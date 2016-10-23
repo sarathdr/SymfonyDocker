@@ -9,8 +9,9 @@ Steps to follow
 4. Browse http://symfonyemailer.dev:8080/app_dev.php/
 
 
-Testing API
-An api key will be displayed on user's profile page. Set that in the header as
+## To test send email API ##
+
+Api key will be displayed on user's profile page. Set that in the header as
 
 ```
 X-EMAILER-API-KEY: <api_key>
