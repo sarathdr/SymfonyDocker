@@ -23,5 +23,7 @@ RUN chown -R www-data var/logs
 RUN chown -R www-data var/cache
 RUN chown -R www-data var/sessions
 
+RUN composer install --no-scripts
+
 CMD php-fpm -F --allow-to-run-as-root
 
