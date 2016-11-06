@@ -13,11 +13,15 @@ RUN apt-get update && \
 
 RUN docker-php-ext-install pdo pdo_mysql
 
-# Hack for symfony cache folder, need a better solution
-USER 1000
-
 WORKDIR /app
 
 ADD . ./
-RUN chmod -R 777 var/logs
-RUN chmod -R 777 var/cache
+
+RUN usermod -u 1000 www-data
+
+RUN chown -R www-data var/logs
+RUN chown -R www-data var/cache
+RUN chown -R www-data var/sessions
+
+CMD php-fpm -F --allow-to-run-as-root
+

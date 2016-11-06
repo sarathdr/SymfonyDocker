@@ -17,9 +17,6 @@ services:
     links:
       - mysql:mysqldb
       - mailer:mailerhost
-    volumes:
-      - ./:/app
-    working_dir: /app
 
   mysql:
       build: docker/mysql
